@@ -83,7 +83,9 @@ end
 theorem impl_as_contrapositive :
   (P → Q) → (¬Q → ¬P)  :=
 begin
-  sorry,
+  intros h1 h2 h3,
+  have newhipo : Q := h1 h3,
+  contradiction,
 end
 
 theorem impl_as_contrapositive_converse :
