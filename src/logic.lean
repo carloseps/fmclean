@@ -130,13 +130,21 @@ end
 theorem disj_as_negconj :
   P∨Q → ¬(¬P∧¬Q)  :=
 begin
-  sorry,
+  intros h1 h2,
+  cases h2 with hp hq,
+  cases  h1,
+    contradiction,
+    contradiction,
 end
 
 theorem conj_as_negdisj :
   P∧Q → ¬(¬P∨¬Q)  :=
 begin
-  sorry,
+  intros h1 h2,
+  cases h1 with hp hq,
+  cases h2,
+    contradiction,
+    contradiction,
 end
 
 
@@ -147,13 +155,28 @@ end
 theorem demorgan_disj :
   ¬(P∨Q) → (¬P ∧ ¬Q)  :=
 begin
-  sorry,
+  intro h1,
+  split,
+    intro hp,
+    have newhipo : (P∨Q),
+    left,
+      apply hp,
+      contradiction,
+    intro hq,
+    have newhipo : (P∨Q),
+      right,
+      apply hq,
+      contradiction,
 end
 
 theorem demorgan_disj_converse :
   (¬P ∧ ¬Q) → ¬(P∨Q)  :=
 begin
-  sorry,
+  intros h1 h2,
+  cases h1 with naop naoq,
+    cases h2,
+    contradiction,
+    contradiction,
 end
 
 theorem demorgan_conj :
@@ -165,7 +188,11 @@ end
 theorem demorgan_conj_converse :
   (¬Q ∨ ¬P) → ¬(P∧Q)  :=
 begin
-  sorry,
+  intros h1 h2,
+  cases h2 with hp hq,
+    cases h1 with naoq naop,
+    contradiction,
+    contradiction,
 end
 
 theorem demorgan_conj_law :
@@ -187,7 +214,17 @@ end
 theorem distr_conj_disj :
   P∧(Q∨R) → (P∧Q)∨(P∧R)  :=
 begin
-  sorry,
+  intro h1,
+  cases h1 with hp hqr,
+  cases hqr,
+  left,
+    split,
+      assumption,
+      assumption,
+  right,
+    split,
+      assumption,
+      assumption,
 end
 
 theorem distr_conj_disj_converse :
@@ -233,7 +270,8 @@ end
 theorem impl_refl :
   P → P  :=
 begin
-  sorry,
+  intro h1,
+  assumption,
 end
 
 ------------------------------------------------
