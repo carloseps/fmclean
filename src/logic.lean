@@ -230,13 +230,38 @@ end
 theorem distr_conj_disj_converse :
   (P∧Q)∨(P∧R) → P∧(Q∨R)  :=
 begin
-  sorry,
+  intro h1,
+  split,
+  cases h1,
+    cases h1 with hq hpr,
+    assumption,
+      cases h1 with p q,
+      assumption,
+      cases h1,
+        cases h1 with hp hq,
+        left,
+          assumption,
+        cases h1 with hp hpr,
+        right,
+        assumption,
 end
 
 theorem distr_disj_conj :
   P∨(Q∧R) → (P∨Q)∧(P∨R)  :=
 begin
-  sorry,
+  intro h1,
+  cases h1,
+    split,
+    left,
+      assumption,
+      left,
+        assumption,
+    cases h1 with hq hr,
+    split,
+    right,
+      assumption,
+    right,
+      assumption,
 end
 
 theorem distr_disj_conj_converse :
@@ -253,13 +278,20 @@ end
 theorem curry_prop :
   ((P∧Q)→R) → (P→(Q→R))  :=
 begin
-  sorry,
+  intros h1 h2 h3,
+  have newhipo : (P∧Q),
+  split,
+    assumption,
+    assumption,
+  apply h1 newhipo,
 end
 
 theorem uncurry_prop :
   (P→(Q→R)) → ((P∧Q)→R)  :=
 begin
-  sorry,
+  intros h1 h2,
+  cases h2 with hp hq,
+  apply h1 hp hq,
 end
 
 
@@ -281,37 +313,59 @@ end
 theorem weaken_disj_right :
   P → (P∨Q)  :=
 begin
-  sorry,
+  intro h1,
+  left, --escolhe lado esquerdo do alvo
+  assumption,
 end
 
 theorem weaken_disj_left :
   Q → (P∨Q)  :=
 begin
-  sorry,
+  intro h1,
+  right, --escolhe lado direito do alvo
+  assumption,
 end
 
 theorem weaken_conj_right :
   (P∧Q) → P  :=
 begin
-  sorry,
+  intro h1,
+  cases h1 with hp hq,
+    assumption,
 end
 
 theorem weaken_conj_left :
   (P∧Q) → Q  :=
 begin
-  sorry,
+  intro h1,
+  cases h1 with hp hq,
+    assumption,
 end
 
 theorem conj_idempot :
   (P∧P) ↔ P :=
 begin
-  sorry,
+  split,
+  intro h1,
+  cases h1,
+    assumption,
+  intro h2,
+    split,
+      assumption,
+      assumption,
 end
 
 theorem disj_idempot :
   (P∨P) ↔ P  :=
 begin
-  sorry,
+  split,
+  intro h1,
+  cases h1,
+    assumption,
+    assumption,
+  intro h2,
+    right, --ou esquerda, tanto faz
+      assumption,
 end
 
 end propositional
