@@ -18,13 +18,23 @@ end
 theorem doubleneg_elim :
   ¬¬P → P  :=
 begin
-  sorry,
+  by_cases hipo : P,
+    intro h1,
+    apply hipo,
+
+    intro h1,
+    have newhipo := h1 hipo,
+    contradiction,
 end
 
 theorem doubleneg_law :
   ¬¬P ↔ P  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := doubleneg_elim P,
+    apply primeiraHipo,
+  have segundaHipo := doubleneg_intro P,
+    apply segundaHipo,
 end
 
 ------------------------------------------------
@@ -85,19 +95,27 @@ theorem impl_as_contrapositive :
 begin
   intros h1 h2 h3,
   have newhipo : Q := h1 h3,
-  contradiction,
+    contradiction,
 end
 
 theorem impl_as_contrapositive_converse :
   (¬Q → ¬P) → (P → Q)  :=
 begin
-  sorry,
+  intros h1 h2,
+  by_cases q: Q,
+    assumption,
+    have newhipo := h1 q,
+      contradiction,
 end
 
 theorem contrapositive_law :
   (P → Q) ↔ (¬Q → ¬P)  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := impl_as_contrapositive P Q,
+    apply primeiraHipo,
+  have segundaHipo := impl_as_contrapositive_converse P Q,
+    apply segundaHipo,
 end
 
 
@@ -108,7 +126,15 @@ end
 theorem lem_irrefutable :
   ¬¬(P∨¬P)  :=
 begin
-  sorry,
+  intros h1,
+  have leiTercEscolh : P ∨ ¬P,
+    right,
+    intro h2,
+    have leiTercEscolhOutraParte : P ∨ ¬P,
+      left,
+      apply h2,
+      contradiction,
+  contradiction,
 end
 
 
@@ -119,7 +145,12 @@ end
 theorem peirce_law_weak :
   ((P → Q) → P) → ¬¬P  :=
 begin
-  sorry,
+  intros h1 h2,
+  have newhipo : P → Q,
+    intro h2,
+    contradiction,
+  have obterP := h1 newhipo,
+    contradiction,
 end
 
 
@@ -182,7 +213,16 @@ end
 theorem demorgan_conj :
   ¬(P∧Q) → (¬Q ∨ ¬P)  :=
 begin
-  sorry,
+  intro h1,
+  by_cases P,
+  left,
+  by_contradiction q,
+  have newhipo : P∧Q,
+    split,
+    repeat {assumption},
+  contradiction,
+  right,
+  assumption,
 end
 
 theorem demorgan_conj_converse :
@@ -198,13 +238,21 @@ end
 theorem demorgan_conj_law :
   ¬(P∧Q) ↔ (¬Q ∨ ¬P)  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := demorgan_conj P Q,
+    apply primeiraHipo,
+  have segundaHipo := demorgan_conj_converse P Q,
+    apply segundaHipo,
 end
 
 theorem demorgan_disj_law :
   ¬(P∨Q) ↔ (¬P ∧ ¬Q)  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := demorgan_disj P Q,
+    apply primeiraHipo,
+  have segundaHipo := demorgan_disj_converse P Q,
+    apply segundaHipo,
 end
 
 ------------------------------------------------
@@ -267,7 +315,17 @@ end
 theorem distr_disj_conj_converse :
   (P∨Q)∧(P∨R) → P∨(Q∧R)  :=
 begin
-  sorry,
+  intro h1,
+  cases h1 with pq pr,
+  cases pq with p q,
+    left,
+      assumption,
+    cases pr with p r,
+      left,
+        assumption,
+      right,
+        split,
+          repeat {assumption},
 end
 
 
@@ -484,7 +542,7 @@ end
 theorem exists_conj_as_conj_exists :
   (∃x, P x ∧ Q x) → (∃x, P x) ∧ (∃x, Q x)  :=
 begin
-  sorry,
+  intro h1,
 end
 
 theorem exists_disj_as_disj_exists :
