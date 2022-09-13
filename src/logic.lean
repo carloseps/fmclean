@@ -542,7 +542,7 @@ end
 theorem exists_conj_as_conj_exists :
   (∃x, P x ∧ Q x) → (∃x, P x) ∧ (∃x, Q x)  :=
 begin
-  intro h1,
+  sorry,
 end
 
 theorem exists_disj_as_disj_exists :
