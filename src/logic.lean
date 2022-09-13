@@ -463,7 +463,15 @@ end
 theorem demorgan_forall :
   ¬(∀x, P x) → (∃x, ¬P x)  :=
 begin
-  sorry,
+  apply impl_as_contrapositive_converse (¬(∀x, P x)) (∃x, ¬P x),
+  intros nEa,
+  apply doubleneg_intro (∀x, P x),
+  intro a,
+  by_contra nPa,
+  have newhipo : (∃x, ¬P x),
+    existsi a,
+    assumption,
+  contradiction,
 end
 
 theorem demorgan_forall_converse :
@@ -478,13 +486,21 @@ end
 theorem demorgan_forall_law :
   ¬(∀x, P x) ↔ (∃x, ¬P x)  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := demorgan_forall U P,
+    apply primeiraHipo,
+  have segundaHipo := demorgan_forall_converse U P,
+    apply segundaHipo,
 end
 
 theorem demorgan_exists_law :
   ¬(∃x, P x) ↔ (∀x, ¬P x)  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := demorgan_exists U P,
+    apply primeiraHipo,
+  have segundaHipo := demorgan_exists_converse U P,
+    apply segundaHipo,
 end
 
 
@@ -513,25 +529,46 @@ end
 theorem forall_as_neg_exists_converse :
   ¬(∃x, ¬P x) → (∀x, P x)  :=
 begin
-  sorry,
+  intros nEnPa a,
+  by_contra nPa,
+  have newhipo : ∃x, ¬P x,
+    existsi a,
+    apply nPa,
+  contradiction,
 end
 
 theorem exists_as_neg_forall_converse :
   ¬(∀x, ¬P x) → (∃x, P x)  :=
 begin
-  sorry,
+  intro npTdA,
+  by_contra nEa,
+  have newhipo : (∀x, ¬P x),
+    intros a Pa,
+    have otherhipo : ∃x, P x,
+      existsi a,
+      assumption,
+    contradiction,
+  contradiction,
 end
 
 theorem forall_as_neg_exists_law :
   (∀x, P x) ↔ ¬(∃x, ¬P x)  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := forall_as_neg_exists U P,
+    apply primeiraHipo,
+  have segundaHipo := forall_as_neg_exists_converse U P,
+    apply segundaHipo,
 end
 
 theorem exists_as_neg_forall_law :
   (∃x, P x) ↔ ¬(∀x, ¬P x)  :=
 begin
-  sorry,
+  split,
+  have primeiraHipo := exists_as_neg_forall U P,
+    apply primeiraHipo,
+  have segundaHipo := exists_as_neg_forall_converse U P,
+    apply segundaHipo,
 end
 
 
@@ -542,38 +579,85 @@ end
 theorem exists_conj_as_conj_exists :
   (∃x, P x ∧ Q x) → (∃x, P x) ∧ (∃x, Q x)  :=
 begin
-  sorry,
+  intro ePa,
+  cases ePa with a pq,
+    cases pq with pa qa,
+      split,
+        existsi a,
+        assumption,
+        existsi a,
+        assumption,
 end
 
 theorem exists_disj_as_disj_exists :
   (∃x, P x ∨ Q x) → (∃x, P x) ∨ (∃x, Q x)  :=
 begin
-  sorry,
+  intro ePa,
+  cases ePa with a pq,
+    cases pq with pa qa,
+      left,
+        existsi a,
+        assumption,
+      right,
+        existsi a,
+        assumption,
 end
 
 theorem exists_disj_as_disj_exists_converse :
   (∃x, P x) ∨ (∃x, Q x) → (∃x, P x ∨ Q x)  :=
 begin
-  sorry,
+  intro ePaOUeQa,
+  cases ePaOUeQa with ePa eQa,
+    cases ePa with a Pa,
+      existsi a,
+      left,
+        assumption,
+    cases eQa with a Qa,
+      existsi a,
+      right,
+        assumption,
 end
 
 theorem forall_conj_as_conj_forall :
   (∀x, P x ∧ Q x) → (∀x, P x) ∧ (∀x, Q x)  :=
 begin
-  sorry,
+  intro pTdaPaEQa,
+  split,
+    intro a,
+    have newhipo := pTdaPaEQa a,
+    cases newhipo with pq qa,
+    assumption,
+
+    intro a,
+    have otherhipo := pTdaPaEQa a,
+    cases otherhipo with pq qa,
+    assumption,
 end
 
 theorem forall_conj_as_conj_forall_converse :
   (∀x, P x) ∧ (∀x, Q x) → (∀x, P x ∧ Q x)  :=
 begin
-  sorry,
+  intros pTdaPaEpTdaQa a,
+  cases pTdaPaEpTdaQa with pTdaPa pTdaQa,
+    split,
+      have newhipo := pTdaPa a,
+        assumption,
+      have newhipo := pTdaQa a,
+        assumption,
 end
 
 
 theorem forall_disj_as_disj_forall_converse :
   (∀x, P x) ∨ (∀x, Q x) → (∀x, P x ∨ Q x)  :=
 begin
-  sorry,
+  intros pTdaPaOUpTdaQa a,
+  cases pTdaPaOUpTdaQa with pTdaPa pTdaQa,
+    left,
+      have newhipo := pTdaPa a,
+        assumption,
+    right,
+      have newhipo := pTdaQa a,
+        assumption,
 end
 
 
