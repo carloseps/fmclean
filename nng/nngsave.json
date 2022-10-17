@@ -24,27 +24,33 @@
     },
     {
       "lean": "lemma zero_add (n : mynat) : 0 + n = n :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction n with numero soma,\r\nrefl,\r\nsimp [add_succ, soma],"
     },
     {
       "lean": "lemma add_assoc (a b c : mynat) : (a + b) + c = a + (b + c) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction c with num soma,\r\nsimp[add_zero],\r\nsimp[add_succ, soma],"
     },
     {
       "lean": "lemma succ_add (a b : mynat) : succ a + b = succ (a + b) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction b with x soma,\r\nrefl,\r\nsimp[add_succ, soma],"
     },
     {
       "lean": "lemma add_comm (a b : mynat) : a + b = b + a :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction b with x soma,\r\nsimp[zero_add, add_zero],\r\nsimp[add_assoc, succ_add],\r\nsimp[add_succ, soma],"
     },
     {
       "lean": "theorem succ_eq_add_one (n : mynat) : succ n = n + 1 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction n with x soma,\r\nsimp[zero_add, one_eq_succ_zero],\r\nsimp[succ_add, add_succ],\r\nassumption,"
     },
     {
       "lean": "lemma add_right_comm (a b c : mynat) : a + b + c = a + c + b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction c with x soma,\r\nsimp[add_zero, zero_add],\r\nsimp[add_comm, add_assoc],"
     },
     {
       "lean": "lemma zero_mul (m : mynat) : 0 * m = 0 :=\n",
