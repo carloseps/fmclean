@@ -229,31 +229,38 @@
     },
     {
       "lean": "example (P Q : Prop) (p : P) (q : Q) : P ∧ Q :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\nrepeat {assumption},"
     },
     {
       "lean": "lemma and_symm (P Q : Prop) : P ∧ Q → Q ∧ P :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro peq,\ncases peq with p q,\nsplit,\nrepeat {assumption},"
     },
     {
       "lean": "lemma and_trans (P Q R : Prop) : P ∧ Q → Q ∧ R → P ∧ R :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intros peq qer,\ncases peq with p q,\ncases qer with q r,\nsplit,\nrepeat {assumption},"
     },
     {
       "lean": "lemma iff_trans (P Q R : Prop) : (P ↔ Q) → (Q ↔ R) → (P ↔ R) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intros hpeeq hqeer,\nsplit,\n  intro p,\n  cases hqeer with qr rq,\n  cases hpeeq with pq qp,\n  have q := pq p,\n  have r := qr q,\n  assumption,\n\n  intro r,\n  cases hqeer with qr rq,\n  cases hpeeq with pq qp,\n  have q := rq r,\n  have p := qp q,\n  assumption,"
     },
     {
       "lean": "lemma iff_trans (P Q R : Prop) : (P ↔ Q) → (Q ↔ R) → (P ↔ R) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intros hpeeq hqeer,\nsplit,\n  intro p,\n  cases hqeer with qr rq,\n  cases hpeeq with pq qp,\n  have q := pq p,\n  have r := qr q,\n  assumption,\n\n  intro r,\n  cases hqeer with qr rq,\n  cases hpeeq with pq qp,\n  have q := rq r,\n  have p := qp q,\n  assumption,"
     },
     {
       "lean": "example (P Q : Prop) : Q → (P ∨ Q) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro q,\nright,\nassumption,"
     },
     {
       "lean": "lemma or_symm (P Q : Prop) : P ∨ Q → Q ∨ P :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro pouq,\ncases pouq with p q,\nright,\nassumption,\nleft,\nassumption,"
     },
     {
       "lean": "lemma and_or_distrib_left (P Q R : Prop) : P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) :=\n",
