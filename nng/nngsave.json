@@ -264,15 +264,18 @@
     },
     {
       "lean": "lemma and_or_distrib_left (P Q R : Prop) : P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\nintro peqr,\r\ncases peqr with p qr,\r\ncases qr with q r,\r\nleft,\r\nsplit,\r\nrepeat{assumption},\r\nright,\r\nsplit,\r\nrepeat{assumption},\r\nintro peqper,\r\ncases peqper with peq per,\r\ncases peq with p q,\r\nsplit,\r\nassumption,\r\nleft,\r\nassumption,\r\ncases per with p r,\r\nsplit,\r\nassumption,\r\nright,\r\nassumption,"
     },
     {
       "lean": "lemma contra (P Q : Prop) : (P ∧ ¬ P) → Q :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro penp,\r\ncases penp with p np,\r\ncontradiction,"
     },
     {
       "lean": "lemma contrapositive2 (P Q : Prop) : (¬ Q → ¬ P) → (P → Q) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intros nqnp p,\r\nby_cases q : Q,\r\nassumption,\r\nhave np := nqnp q,\r\ncontradiction,\r\n"
     },
     {
       "lean": "theorem succ_inj' {a b : mynat} (hs : succ(a) = succ(b)) :  a = b := \n",
