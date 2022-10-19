@@ -364,71 +364,88 @@
     },
     {
       "lean": "lemma one_add_le_self (x : mynat) : x ≤ 1 + x :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "use 1,\r\nrw add_comm,"
     },
     {
       "lean": "lemma le_refl (x : mynat) : x ≤ x :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "use 0,\r\nrw add_zero,\r\nrefl,"
     },
     {
       "lean": "theorem le_succ (a b : mynat) : a ≤ b → a ≤ (succ b) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro ameqb,\r\nrw le_iff_exists_add at ameqb,\r\ncases ameqb with c beqac,\r\nrw beqac,\r\nrw le_iff_exists_add,\r\nuse succ c,\r\nrw add_succ,\r\nrefl,"
     },
     {
       "lean": "lemma zero_le (a : mynat) : 0 ≤ a :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "use a,\r\nrw zero_add,\r\nrefl,"
     },
     {
       "lean": "theorem le_trans (a b c : mynat) (hab : a ≤ b) (hbc : b ≤ c) : a ≤ c :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases hbc with numc ceqbnum,\r\ncases hab with numb beqanum,\r\nuse (numc+numb),\r\nrw ceqbnum,\r\nrw beqanum,\r\nrw add_assoc a numb numc,\r\nsimp[add_assoc],"
     },
     {
       "lean": "theorem le_antisymm (a b : mynat) (hab : a ≤ b) (hba : b ≤ a) : a = b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases hab with numb beqanum,\r\ncases hba with numc aeqbnum,\r\nrw aeqbnum at beqanum,\r\nsymmetry at beqanum,\r\nrw add_assoc b numc numb at beqanum,\r\nhave ncnbeqzero := eq_zero_of_add_right_eq_self beqanum,\r\nhave nceqzero := add_right_eq_zero ncnbeqzero,\r\nrw nceqzero at aeqbnum,\r\nrw add_zero b at aeqbnum,\r\nassumption,"
     },
     {
       "lean": "lemma le_zero (a : mynat) (h : a ≤ 0) : a = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases h with num zeroeqanum,\r\nsymmetry at zeroeqanum,\r\nhave numeqzero := add_right_eq_zero zeroeqanum,\r\nassumption,"
     },
     {
       "lean": "lemma succ_le_succ (a b : mynat) (h : a ≤ b) : succ a ≤ succ b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases h with num beqanum,\r\nrw beqanum,\r\nuse num,\r\nrw succ_add,\r\nrefl,"
     },
     {
       "lean": "theorem le_total (a b : mynat) : a ≤ b ∨ b ≤ a :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "revert a,\r\ninduction b with num1 ptodo,\r\nintro a,\r\nright,\r\napply zero_le a,\r\nintro a,\r\ncases a with num2,\r\nleft,\r\nexact zero_le (succ num1),\r\ncases ptodo num2,\r\nleft,\r\napply succ_le_succ num2 num1,\r\nassumption,\r\nright,\r\napply succ_le_succ num1 num2,\r\nassumption,"
     },
     {
       "lean": "lemma le_succ_self (a : mynat) : a ≤ succ a :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "apply le_succ,\r\nrefl,"
     },
     {
       "lean": "theorem add_le_add_right {a b : mynat} : a ≤ b → ∀ t, (a + t) ≤ (b + t) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intros ameqb num,\r\ncases ameqb with a beqaa,\r\nuse a,\r\nrw beqaa,\r\nrw add_right_comm,\r\nrefl,"
     },
     {
       "lean": "theorem le_of_succ_le_succ (a b : mynat) : succ a ≤ succ b → a ≤ b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro succamsuccb,\r\ncases succamsuccb with k succamsuccb,\r\nrw succ_add a k at succamsuccb,\r\nhave beqak := succ_inj succamsuccb,\r\nuse k,\r\nassumption,"
     },
     {
       "lean": "theorem not_succ_le_self (a : mynat) : ¬ (succ a ≤ a) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro succaa,\r\ninduction a with num aeqsucc,\r\nhave hipo := le_zero (succ 0) succaa,\r\napply succ_ne_zero 0,\r\nassumption,\r\napply aeqsucc,\r\napply le_of_succ_le_succ (succ num) num,\r\nassumption,"
     },
     {
       "lean": "theorem add_le_add_left {a b : mynat} (h : a ≤ b) (t : mynat) :\n  t + a ≤ t + b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction t with num ineq,\r\nrw zero_add a,\r\nrw zero_add b,\r\nassumption,\r\nrw succ_add num a,\r\nrw succ_add num b,\r\napply succ_le_succ,\r\nassumption,"
     },
     {
       "lean": "lemma lt_aux_one (a b : mynat) : a ≤ b ∧ ¬ (b ≤ a) → succ a ≤ b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro conj,\r\ncases conj with ineq1 ineq2,\r\ncases ineq1 with num eq,\r\ncases num with num2,\r\nexfalso,\r\nrw add_zero at eq,\r\napply ineq2,\r\nuse 0,\r\nrw add_zero b,\r\nsymmetry,\r\nassumption,\r\nuse num2,\r\nrw succ_add a num2,\r\nrw eq,\r\nrw add_succ a num2,\r\nrefl,"
     },
     {
       "lean": "lemma lt_aux_two (a b : mynat) : succ a ≤ b → a ≤ b ∧ ¬ (b ≤ a) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro ineq,\r\nsplit,\r\napply le_of_succ_le_succ,\r\napply le_succ,\r\nassumption,\r\nintro ineq2,\r\nhave succama := le_trans (succ a) b a ineq ineq2,\r\napply not_succ_le_self a,\r\nassumption,"
     },
     {
       "lean": "lemma lt_iff_succ_le (a b : mynat) : a < b ↔ succ a ≤ b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\napply lt_aux_one,\r\napply lt_aux_two, -- q alivio "
     }
   ]
 }
